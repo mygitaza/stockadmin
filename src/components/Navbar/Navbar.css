@@ -1,0 +1,29 @@
+.admin-header{
+    width: 100%;
+    background-color: black;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+}
+.admin-header-wrapper{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 10px 40px;
+}
+.admin-header-wrapper button{
+    padding: 10px 40px;
+    background-color: rgb(244, 123, 123);
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+.admin-header h3{
+    color: white;
+}
+
