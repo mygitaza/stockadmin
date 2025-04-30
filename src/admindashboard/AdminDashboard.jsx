@@ -5,7 +5,7 @@ import { useDeleteUserMutation, useFetchUsersQuery } from '../redux/feature/user
 import { useApproveStockMutation, useGetAllStockUnitsQuery } from '../redux/feature/stock/stockApi'
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux';
-import { updateStockStatus } from '../../../frontend/src/redux/slices/stockSlice'
+import { updateStockStatus } from '../redux/feature/slice/stockSlice'
  
  
 const AdminDashboard = () => {
