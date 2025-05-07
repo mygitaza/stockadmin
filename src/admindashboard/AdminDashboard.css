@@ -34,6 +34,9 @@ thead{
     width: 20px;
     background-color: rgb(69, 69, 7);
 }
+.tbody-roll-section{
+    overflow-x: scroll;
+}
 
 @media (max-width:431px) {
     .admin-thead{

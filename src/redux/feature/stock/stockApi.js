@@ -48,3 +48,5 @@ export const {
     useDeleteStockMutation,
     useGetAllStockUnitsQuery,
 } = stockApi
+
+export default stockApi;

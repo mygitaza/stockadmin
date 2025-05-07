@@ -15,23 +15,6 @@ const AdminDashboard = () => {
     const [deleteUser, { isLoading: deleting }] = useDeleteUserMutation();
     const [approveStock, { isLoading: approving }] = useApproveStockMutation();
 
-    const handleApprove = useCallback(async (userId, stockId) => {
-        console.log('Approving stock with:', { userId, stockId });
-        try {
-          await approveStock({ userId, stockId }).unwrap();
-          alert('Payment status updated to Approved');
-          dispatch(updateStockStatus('Approved'));
-        } catch (error) {
-          console.error('Failed to approve stock:', error);
-          alert('Approval failed. Please try again.');
-        }
-      }, [approveStock]);
-
-      const handleStatus=(e)=>{
-        const newStatus = e.target.value;
-        dispatch(updateStockStatus(newStatus));
-        alert(`Payment status updated to ${newStatus}`);
-      }
 
       const handleDelete = useCallback(async (id) => {
         try {
@@ -76,7 +59,7 @@ const AdminDashboard = () => {
               const pendingStock = userStocks.find((stock) => stock.status !== 'Approved');
 
               return (
-                <tr key={user._id}>
+                <tr key={user._id} className='tbody-roll-section'>
                   <td>{index + 1}</td>
                   <td>{user.firstName}</td>
                   <td>{user.lastName}</td>
@@ -89,8 +72,22 @@ const AdminDashboard = () => {
       <div key={stock._id}>
         <select
           value={stock.status}
-          onChange={handleStatus}
-          disabled={approving}
+          disabled={stock.status === 'Approved' || approving}
+          onChange={async (e) => {
+            if (e.target.value === 'Approved') {
+              try {
+                await approveStock({
+                  userId: stock.userId,
+                  stockId: stock.stockId
+                }).unwrap();
+                dispatch(updateStockStatus({ stockId: stock.stockId, status: 'Approved' }));
+                alert('Stock status updated to Approved');
+              } catch (error) {
+                console.error('Failed to approve stock:', error);
+                alert('Stock approval failed.');
+              }
+            }
+          }}
         >
           <option value="Processing">Processing</option>
           <option value="Approved">Approved</option>
